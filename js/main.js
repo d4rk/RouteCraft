@@ -273,6 +273,10 @@
           animation: 170,
           handle: ".drag-handle",
           draggable: "article",
+          ghostClass: "sortable-ghost",
+          chosenClass: "sortable-chosen",
+          dragClass: "sortable-drag",
+          fallbackOnBody: true,
           onEnd: (event) => {
             const oldIndex = event.oldIndex;
             const newIndex = event.newIndex;
