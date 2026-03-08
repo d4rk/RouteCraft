@@ -30,7 +30,6 @@
       canAddStop() {
         return (
           this.addForm.title.trim() &&
-          this.addForm.description.trim() &&
           Number.isFinite(this.addForm.zoomLevel) &&
           Number.isFinite(this.addForm.latitude) &&
           Number.isFinite(this.addForm.longitude)
@@ -199,7 +198,7 @@
         this.stops[index] = {
           ...current,
           title: this.editForm.title.trim() || current.title,
-          description: this.editForm.description.trim() || current.description,
+          description: this.editForm.description.trim(),
           zoomLevel: RouteCraft.clampZoom(this.editForm.zoomLevel || current.zoomLevel),
           latitude: Number.isFinite(this.editForm.latitude) ? this.editForm.latitude : current.latitude,
           longitude: Number.isFinite(this.editForm.longitude) ? this.editForm.longitude : current.longitude,
