@@ -7,7 +7,7 @@
 
   <link href="https://unpkg.com/maplibre-gl@5.1.0/dist/maplibre-gl.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
 
   <link rel="stylesheet" href="styles/base.css" />
@@ -47,12 +47,13 @@
 
           <header class="mb-4">
             <div class="flex items-center gap-3">
-              <img
-                src="assets/RouteCraft%20Logo.png"
-                alt="RouteCraft"
-                class="h-10 w-auto md:h-12"
-              />
-              <span class="sr-only">RouteCraft</span>
+              <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-sm">
+                <span class="material-symbols-outlined text-2xl leading-none">public</span>
+              </div>
+              <div>
+                <h1 class="text-2xl font-bold tracking-tight text-slate-900">RouteCraft</h1>
+                <p class="rc-subtitle text-sm text-slate-600">Plan, reorder, and share trips on an interactive map.</p>
+              </div>
             </div>
           </header>
 

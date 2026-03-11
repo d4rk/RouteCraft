@@ -11,8 +11,7 @@ RouteCraft is a browser-based travel itinerary planner that lets you search dest
 - Shareable URL (hash) with compressed itinerary data
 - KML export and import
 - Responsive layout for desktop and mobile
-- Refined typography (Fraunces + Manrope)
-- Header logo image from `assets/RouteCraft Logo.png`
+- Refined typography (Manrope)
 
 ## How It Works
 
