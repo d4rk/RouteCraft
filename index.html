@@ -17,8 +17,12 @@
 <body class="bg-slate-100 text-slate-800">
   <div id="app" class="h-full">
     <div class="grid h-full md:grid-cols-[40%_60%]">
-      <section class="relative z-20 h-full overflow-y-auto border-r border-slate-200 bg-gradient-to-b from-slate-50 to-slate-100 p-4 pb-32">
+      <aside class="relative order-1 md:order-2 h-full">
+        <div id="map" class="relative h-[54vh] w-full md:fixed md:right-0 md:top-0 md:h-full md:w-[60%]"></div>
+      </aside>
+      <section class="relative z-20 order-2 md:order-1 h-full overflow-y-auto border-r border-slate-200 bg-slate-50 md:bg-gradient-to-b md:from-slate-50 md:to-slate-100 p-4 pt-4 pb-32 overscroll-contain">
         <div class="mx-auto max-w-2xl">
+          <div class="rounded-2xl border border-slate-200 bg-white/90 p-3 shadow-sm md:border-0 md:bg-transparent md:p-0 md:shadow-none">
           <div
             v-if="sourcePromptOpen"
             class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4"
@@ -58,7 +62,7 @@
           </header>
 
           <div class="sticky top-2 z-30 mb-4 rounded-xl border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur add-stop-menu">
-            <div class="mb-2 flex gap-2">
+            <div class="mb-2 flex flex-wrap gap-2">
               <button
                 type="button"
                 class="rounded-md border border-slate-300 bg-white px-2.5 py-1.5 text-xs font-semibold hover:bg-slate-50"
@@ -120,7 +124,7 @@
               @change="importKmlFile"
             />
 
-            <div v-if="addMenuOpen" class="space-y-2">
+          <div v-if="addMenuOpen" class="space-y-2">
               <div class="relative autocomplete-add">
                 <input
                   v-model.trim="addForm.query"
@@ -255,12 +259,10 @@
               </template>
             </article>
           </div>
+          </div>
         </div>
       </section>
 
-      <aside class="relative h-full">
-        <div id="map" class="fixed right-0 top-0 h-full w-full md:w-[60%]"></div>
-      </aside>
     </div>
   </div>
 

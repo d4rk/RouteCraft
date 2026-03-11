@@ -9,6 +9,11 @@ body,
 
 body {
   font-family: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  overflow: hidden;
+}
+
+#app {
+  overflow: hidden;
 }
 
 .rc-subtitle {

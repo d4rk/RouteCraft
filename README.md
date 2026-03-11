@@ -10,7 +10,7 @@ RouteCraft is a browser-based travel itinerary planner that lets you search dest
 - Auto-save and auto-load via localStorage
 - Shareable URL (hash) with compressed itinerary data
 - KML export and import
-- Responsive layout for desktop and mobile
+- Responsive layout for desktop and mobile (map top on mobile, list below; contained scroll)
 - Color-coded route segments with matching stop badges
 - Refined typography (Manrope)
 
