@@ -39,13 +39,20 @@ window.RouteCraft.createMapManager = function createMapManager(maplibreglRef) {
     return map;
   }
 
-  function renderMarkers(map, stops, existingMarkers) {
+  function renderMarkers(map, stops, existingMarkers, activeIndex, routeColors) {
     existingMarkers.forEach((marker) => marker.remove());
     const markers = [];
 
-    stops.forEach((stop) => {
+    stops.forEach((stop, index) => {
       const markerEl = document.createElement("div");
       markerEl.className = "custom-marker";
+      const color = routeColors[index % routeColors.length];
+      markerEl.style.background = color;
+      markerEl.style.boxShadow = `0 0 0 6px ${color}2B`;
+      markerEl.classList.add("is-dim");
+      if (index === activeIndex) {
+        markerEl.classList.add("is-active");
+      }
 
       const marker = new maplibreglRef.Marker({ element: markerEl, anchor: "center" })
         .setLngLat([stop.longitude, stop.latitude])
@@ -58,13 +65,26 @@ window.RouteCraft.createMapManager = function createMapManager(maplibreglRef) {
     return markers;
   }
 
-  function refreshRouteLayer(map, stops) {
-    const coordinates = stops.map((stop) => [stop.longitude, stop.latitude]);
+  function refreshRouteLayer(map, stops, routeColors) {
+    const segments = [];
+    for (let i = 0; i < stops.length - 1; i += 1) {
+      segments.push({
+        type: "Feature",
+        properties: {
+          color: routeColors[i % routeColors.length]
+        },
+        geometry: {
+          type: "LineString",
+          coordinates: [
+            [stops[i].longitude, stops[i].latitude],
+            [stops[i + 1].longitude, stops[i + 1].latitude]
+          ]
+        }
+      });
+    }
     const data = {
       type: "FeatureCollection",
-      features: coordinates.length >= 2
-        ? [{ type: "Feature", properties: {}, geometry: { type: "LineString", coordinates } }]
-        : []
+      features: segments
     };
 
     if (!map.getSource("trip-route")) {
@@ -73,14 +93,21 @@ window.RouteCraft.createMapManager = function createMapManager(maplibreglRef) {
         id: "trip-route-glow",
         type: "line",
         source: "trip-route",
-        paint: { "line-color": "#60a5fa", "line-width": 7, "line-opacity": 0.45 }
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": 7,
+          "line-opacity": 0.35
+        }
       });
       map.addLayer({
         id: "trip-route-line",
         type: "line",
         source: "trip-route",
         layout: { "line-cap": "round", "line-join": "round" },
-        paint: { "line-color": "#1d4ed8", "line-width": 3 }
+        paint: {
+          "line-color": ["get", "color"],
+          "line-width": 3.2
+        }
       });
       return;
     }

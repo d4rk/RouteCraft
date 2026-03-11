@@ -14,6 +14,20 @@
         map: null,
         mapLoaded: false,
         markers: [],
+        routeColors: [
+          "#2563EB",
+          "#06B6D4",
+          "#F97316",
+          "#8B5CF6",
+          "#16A34A",
+          "#E11D48",
+          "#F59E0B",
+          "#0EA5E9",
+          "#A855F7",
+          "#14B8A6",
+          "#EF4444",
+          "#22C55E"
+        ],
 
         addForm: RouteCraft.createEmptyForm(),
         addSuggestions: [],
@@ -171,6 +185,19 @@
         }
       },
 
+      getRouteColor(index) {
+        return this.routeColors[index % this.routeColors.length];
+      },
+
+      getBadgeStyle(index) {
+        const color = this.getRouteColor(index);
+        return {
+          backgroundColor: `${color}1A`,
+          color,
+          border: `1px solid ${color}55`
+        };
+      },
+
       escapeXml(text) {
         return String(text || "")
           .replace(/&/g, "&amp;")
@@ -298,8 +325,14 @@ ${placemarks}
 
       syncMapData() {
         if (!this.mapLoaded) return;
-        this.markers = mapManager.renderMarkers(this.map, this.stops, this.markers);
-        mapManager.refreshRouteLayer(this.map, this.stops);
+        this.markers = mapManager.renderMarkers(
+          this.map,
+          this.stops,
+          this.markers,
+          this.activeIndex,
+          this.routeColors
+        );
+        mapManager.refreshRouteLayer(this.map, this.stops, this.routeColors);
       },
 
       flyToStop(index, shouldScroll = true) {
@@ -310,6 +343,13 @@ ${placemarks}
 
         if (this.mapLoaded) {
           mapManager.flyToStop(this.map, stop);
+          this.markers = mapManager.renderMarkers(
+            this.map,
+            this.stops,
+            this.markers,
+            this.activeIndex,
+            this.routeColors
+          );
         }
 
         if (shouldScroll) {
