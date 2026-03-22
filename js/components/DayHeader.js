@@ -10,6 +10,11 @@
     props: {
       /** @type {Day} */
       day: Object,
+      /** @type {Stop[]} */
+      stops: {
+        type: Array,
+        default: () => []
+      },
       /** @type {boolean} */
       isActive: Boolean
     },
@@ -21,6 +26,14 @@
       'toggle-add-menu'
     ],
     methods: {
+      /**
+       * Opens all stops for this day in Google Maps.
+       */
+      openDirections() {
+        if (!this.stops || this.stops.length === 0) return;
+        const url = RC.generateGmapsUrl(this.stops);
+        window.open(url, '_blank');
+      },
       /**
        * Combined action for clicking the Day Header.
        * Selects the day on the map.

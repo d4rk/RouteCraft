@@ -169,6 +169,7 @@
               <!-- Day Header -->
               <day-header
                 :day="day"
+                :stops="getStopsForDay(day.id)"
                 :is-active="store.activeDayId === day.id"
                 @toggle-collapse="store.updateDay(day.id, { isCollapsed: !day.isCollapsed })"
                 @select-day="store.activeDayId = day.id"
@@ -196,6 +197,7 @@
                   v-for="(stop, index) in getStopsForDay(day.id)"
                   :key="stop.id"
                   :stop="stop"
+                  :next-stop="getStopsForDay(day.id)[index + 1]"
                   :index="index"
                   :active-index="activeStopIndexInDay(stop.id, day.id)"
                   :is-globally-active="stops[activeIndex]?.id === stop.id"
@@ -305,6 +307,15 @@
         </div>
 
         <div class="flex shrink-0 items-center gap-1">
+          <button
+            v-if="stops.length > 0"
+            type="button"
+            class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
+            title="View in Google Maps"
+            @click.stop="openDirections"
+          >
+            <span class="material-symbols-outlined text-lg">map</span>
+          </button>
           <button
             type="button"
             class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-all"
@@ -663,6 +674,15 @@
           <div class="flex items-center justify-between gap-2">
             <h2 class="truncate text-base font-semibold text-slate-900">{{ stop.title }}</h2>
             <div class="flex shrink-0 items-center gap-1">
+              <button
+                type="button"
+                class="inline-flex h-7 w-7 items-center justify-center rounded-md text-slate-400 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                aria-label="Get directions"
+                title="Get directions"
+                @click.stop="openDirections"
+              >
+                <span class="material-symbols-outlined text-lg leading-none">directions</span>
+              </button>
               <button
                 type="button"
                 class="inline-flex h-7 w-7 items-center justify-center rounded-md text-slate-400 hover:bg-slate-100 hover:text-blue-600 transition-colors"

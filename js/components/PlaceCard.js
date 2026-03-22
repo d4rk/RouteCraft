@@ -11,6 +11,11 @@
     props: {
       /** @type {Stop} */
       stop: Object,
+      /** @type {Stop|null} */
+      nextStop: {
+        type: Object,
+        default: null
+      },
       /** @type {number} */
       index: Number,
       /** @type {number} */
@@ -37,6 +42,17 @@
       'select-edit-suggestion'
     ],
     methods: {
+      /**
+       * Opens Google Maps directions to the next stop, or a search for this stop.
+       */
+      openDirections() {
+        const stops = [this.stop];
+        if (this.nextStop) {
+          stops.push(this.nextStop);
+        }
+        const url = RC.generateGmapsUrl(stops);
+        window.open(url, '_blank');
+      },
       /**
        * Gets the color assigned to the route segment leading to this place.
        * @param {number} index - The index of the place within its day.

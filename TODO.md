@@ -12,11 +12,12 @@ When working on each item, plan it first. Get confirmation from the
 
 ## Features
 
+- [x] Google Maps Links (directions between segments + day-wide waypoint links)
+- [ ] Route Distance + ETA (per leg + total summary, maybe adjacent chip)
 - [ ] Map Fit + Bounds ("fit all stops" and optional trip bounds)
 - [ ] In bulk add mode, instead of just showing the first result, show a drop down of the top 5 results.
-- [ ] Google Maps Links (directions between segments + day-wide waypoint links)
-- [ ] Route Distance + ETA (per leg + total summary, maybe adjacent chip)
 - [ ] Undo/Redo (revert edits, deletes, and reorder actions)
+- [ ] Secure API Key Management (see `conductor/api-key-mgmt-plan.md`)
 
 ## Architectural Notes
 
